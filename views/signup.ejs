@@ -1,0 +1,58 @@
+<%- include('./partials/header') %>
+
+    <section class="my-4">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row justify-content-center align-items-center">
+                <div class="col-12 col-md-6 col-lg-6">
+                    <!-- img -->
+                    <img src="/images/svg-graphics/signup-g.svg" alt="" class="img-fluid">
+                </div>
+                <!-- col -->
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="mb-lg-9 mb-5">
+                        <h1 class="mb-1 h2 fw-bold">Get Start Shopping</h1>
+                        <p>Welcome to FreshCart! Enter your email to get started.</p>
+                    </div>
+                    <% if(locals.status){ %>
+                        <div class="alert alert-dismissible fade show alert-<%=locals.status%>" role="alert">
+                            <%-locals.message%>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <% } %>
+                    <!-- form -->
+                    <form method="post">
+                        <div class="row g-3">
+                            <!-- col -->
+                            <div class="col-12">
+                                <input type="text" name="first_name" class="form-control" placeholder="First name" aria-label="First name"
+                                required>
+                            </div>
+                            <div class="col-12">
+                                <input type="text" name="last_name" class="form-control" placeholder="Last name" aria-label="Last name">
+                            </div>
+                            <div class="col-12">
+                                <input type="email" name="email" class="form-control" id="inputEmail4" placeholder="Email" required>
+                            </div>
+                            <div class="col-12">
+                
+                                <div class="password-field position-relative">
+                                    <input type="password" id="auth_password_field" placeholder="Enter Password" name="password" class="form-control" required >
+                                    <span><i id="passwordToggler"class="bi bi-eye-slash"></i></span>
+                                </div>
+                            </div>
+                            <!-- btn -->
+                            <div class="col-12 d-grid"> <button type="submit" class="btn btn-primary">Register</button>
+                            </div>
+                
+                            <!-- text -->
+                            <p><small>By continuing, you agree to our <a href="#!"> Terms of Service</a> & <a href="#!">Privacy Policy</a></small></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <%- include('./partials/footer') %>

@@ -1,0 +1,61 @@
+<div class="col">
+    <div class="card card-product product_card">
+        <div class="card-body">
+
+        <div class="text-center position-relative ">
+            <div class=" position-absolute top-0 start-0">
+                <% if(product.trend != '0'){ %>
+                    <span class="badge bg-danger"> <%= trends[product.trend] %> </span> 
+                <% } %>
+            </div>
+
+            <div class="position-absolute top-0 end-0 c-pointer fs-5 toggleProductWishlist wish-<%= product.id %>" productid="<%= product.id %>">
+                <i class="bi bi-heart{% if product.in_wishlist %}-fill text-danger{% endif %}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Wishlist"></i>
+            </div>
+            
+            <a href="/product/details/<%= product.slug %>"> 
+                <img src="/<%= product.thumbnail %>" alt="Grocery Ecommerce Template" class="mb-3 img-fluid">
+            </a>
+        </div>
+        <div class="text-small mb-1">
+            <a href="#!" class="text-decoration-none text-muted">
+            <small><%= product.subcategory.category.name %>/ <%= product.subcategory.name %></small>
+            </a>
+        </div>
+        <h2 class="fs-6" style="min-height: 33.6px;">
+            <a href="/product/details/<%= product.slug %>" class="text-inherit text-decoration-none"><%= product.name %></a>
+        </h2>
+
+        <div>
+            <small class="text-warning"> 
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-half"></i>
+            </small> 
+            <span class="text-muted small">4.5(149)</span>
+        </div>
+        
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <div><span class="text-dark">₹<%= product.final_price %></span> <span
+                class="text-decoration-line-through text-muted">₹<%= product.price %></span>
+            </div>
+            
+
+            <% if(product.in_cart){%>
+                <a href="{% url 'cart' %}" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Go to cart"> 
+                    <i class="bi bi-cart-check"></i> Go to cart
+                </a>
+            <% } else{ %>
+                <a href="{% url 'cart' %}" class="btn d-none btn-primary btn-sm go-<%= product.id %>" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Go to cart">
+                    <i class="bi bi-cart-check"></i> Go to cart
+                </a>
+                <div class="btn btn-primary btn-sm addto-<%= product.id %> addToCart" productid = "<%= product.id %>" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add to cart">
+                    <i class="bi bi-cart-plus"></i> Add
+                </div>
+            <% } %>
+        </div>
+        </div>
+    </div>
+</div>

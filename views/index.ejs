@@ -1,0 +1,162 @@
+<%- include('./partials/header') %>
+
+    <section class="mt-8">
+        <div class="container">
+            <div class="hero-slider ">
+                <div style="background: url('images/slider/slider-1.jpg')no-repeat; background-size: cover; border-radius: .5rem; background-position: center;">
+                    <div class="ps-lg-12 py-lg-16 col-xxl-5 col-md-7 py-14 px-8 text-xs-center">
+                    <span class="badge text-bg-warning">Opening Sale Discount 50%</span>
+
+                    <h2 class="text-dark display-5 fw-bold mt-4">SuperMarket For Fresh Grocery </h2>
+                    <p class="lead">Introduced a new model for online grocery shopping
+                        and convenient home delivery.</p>
+                    <a href="{% url 'allproducts' %}" class="btn btn-dark mt-3">Shop Now <i class="feather-icon icon-arrow-right ms-1"></i></a>
+                    </div>
+
+                </div>
+                <div class=" " style="background: url('images/slider/slider-2.jpg')no-repeat; background-size: cover; border-radius: .5rem; background-position: center;">
+                    <div class="ps-lg-12 py-lg-16 col-xxl-5 col-md-7 py-14 px-8 text-xs-center">
+                    <span class="badge text-bg-warning">Free Shipping - orders over ₹100</span>
+                    <h2 class="text-dark display-5 fw-bold mt-4">Free Shipping on <br> orders over <span
+                        class="text-primary">₹100</span></h2>
+                    <p class="lead">Free Shipping to First-Time Customers Only, After promotions and discounts are applied.
+                    </p>
+                    <a href="{% url 'allproducts' %}" class="btn btn-dark mt-3">Shop Now <i class="feather-icon icon-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Section Start-->
+    <section class="mb-lg-10 mt-lg-14 my-8">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mb-6">
+
+                    <h3 class="mb-0">Featured Categories</h3>
+
+                </div>
+            </div>
+            <div class="category-slider ">
+                <% featured_cat.forEach( function(cat){ %>
+                    <div class="item">
+                        <a href="/product/category/<%= cat.slug %>" class="text-decoration-none text-inherit">
+                            <div class="card card-product mb-lg-4">
+                                <div class="card-body text-center py-8">
+                                    <img src="/<%= cat.thumbnail %>" alt="Grocery Ecommerce Template"
+                                        class="mb-3 img-fluid">
+                                    <div class="text-truncate"><%= cat.name %></div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+    </section>
+    <!-- Category Section End-->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6 mb-3 mb-lg-0">
+                    <div>
+                        <div class="py-10 px-8 rounded"
+                            style="background:url(images/banner/grocery-banner.png)no-repeat; background-size: cover; background-position: center;">
+                            <div>
+                                <h3 class="fw-bold mb-1">Fruits & Vegetables
+                                </h3>
+                                <p class="mb-4">Get Upto <span class="fw-bold">30%</span> Off</p>
+                                <a href="#" class="btn btn-dark">Shop Now</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-12 col-md-6 ">
+
+                    <div>
+                        <div class="py-10 px-8 rounded"
+                            style="background:url(images/banner/grocery-banner-2.jpg)no-repeat; background-size: cover; background-position: center;">
+                            <div>
+                                <h3 class="fw-bold mb-1">Freshly Baked
+                                    Buns
+                                </h3>
+                                <p class="mb-4">Get Upto <span class="fw-bold">25%</span> Off</p>
+                                <a href="#" class="btn btn-dark">Shop Now</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Products Start-->
+    <section class="my-lg-14 my-8">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mb-6">
+                    <h3 class="mb-0">Popular Products</h3>
+                </div>
+            </div>
+
+            <div class="row g-4 row-cols-lg-5 row-cols-2 row-cols-md-3">
+                <% products.forEach(product => { %>
+                    <%- include('./components/productCard', { 'product': product, 'trends': trends }) %>
+                <% }); %>
+            </div>
+        </div>
+    </section>
+    <!-- Popular Products End-->
+
+    <section class="my-lg-14 my-8">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-3">
+                    <div class="mb-8 mb-xl-0">
+                        <div class="mb-6"><img src="images/icons/clock.svg" alt=""></div>
+                        <h3 class="h5 mb-3">
+                            10 minute grocery now
+                        </h3>
+                        <p>Get your order delivered to your doorstep at the earliest from FreshCart pickup stores near
+                            you.</p>
+                    </div>
+                </div>
+                <div class="col-md-6  col-lg-3">
+                    <div class="mb-8 mb-xl-0">
+                        <div class="mb-6"><img src="images/icons/gift.svg" alt=""></div>
+                        <h3 class="h5 mb-3">Best Prices & Offers</h3>
+                        <p>Cheaper prices than your local supermarket, great cashback offers to top it off. Get best
+                            pricess &
+                            offers.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="mb-8 mb-xl-0">
+                        <div class="mb-6"><img src="images/icons/package.svg" alt=""></div>
+                        <h3 class="h5 mb-3">Wide Assortment</h3>
+                        <p>Choose from 5000+ products across food, personal care, household, bakery, veg and non-veg &
+                            other
+                            categories.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="mb-8 mb-xl-0">
+                        <div class="mb-6"><img src="images/icons/refresh-cw.svg" alt=""></div>
+                        <h3 class="h5 mb-3">Easy Returns</h3>
+                        <p>Not satisfied with a product? Return it at the doorstep & get a refund within hours. No
+                            questions asked
+                            <a href="#!">policy</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<%- include('./partials/footer') %>

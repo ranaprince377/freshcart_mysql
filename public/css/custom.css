@@ -1,0 +1,97 @@
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.text-error {
+    color: #db3030;
+}
+
+.alert-error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.c-pointer {
+    cursor: pointer !important;
+}
+
+.bottom-right {
+    position: fixed;
+    bottom: 5px;
+    right: 2%;
+}
+
+.badge-position {
+    transform: translate(-35%, -80%) !important;
+}
+
+.order-status-placed {
+    background-color: #f2c94c;
+    /* Yellow */
+    color: #000;
+    /* Black */
+}
+
+.order-status-confirmed {
+    background-color: #27ae60;
+    /* Green */
+    color: #fff;
+    /* White */
+}
+
+.order-status-packed {
+    background-color: #3498db;
+    /* Blue */
+    color: #fff;
+    /* White */
+}
+
+.order-status-dispatched {
+    background-color: #9b59b6;
+    /* Purple */
+    color: #fff;
+    /* White */
+}
+
+.order-status-out-for-delivery {
+    background-color: #f39c12;
+    /* Orange */
+    color: #000;
+    /* Black */
+}
+
+.order-status-delivered {
+    background-color: #2ecc71;
+    /* Dark Green */
+    color: #fff;
+    /* White */
+}
+
+.order-status-canceled {
+    background-color: #e74c3c;
+    /* Red */
+    color: #fff;
+    /* White */
+}
+
+.product_card {
+    min-height: 390px;
+}

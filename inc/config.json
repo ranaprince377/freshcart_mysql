@@ -1,0 +1,29 @@
+{
+    "development": {
+        "database": "freshcart_mysql",
+        "username": "root",
+        "password": "",
+        "options": {
+            "host": "localhost",
+            "dialect": "mariadb"
+        }
+    },
+    "test": {
+        "database": "freshcart_mysql",
+        "username": "root",
+        "password": "",
+        "options": {
+            "host": "localhost",
+            "dialect": "mariadb"
+        }
+    },
+    "production": {
+        "database": "freshcart_mysql",
+        "username": "root",
+        "password": "",
+        "options": {
+            "host": "localhost",
+            "dialect": "mariadb"
+        }
+    }
+}
