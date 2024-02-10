@@ -1,0 +1,72 @@
+<%- include('./partials/header') %>
+
+    <section>
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+
+                <!-- sidebar -->
+                <%- include('./partials/sidebar') %>
+
+                    <div class="col-lg-9 col-md-8 col-12">
+                        <div class="py-6 p-md-6 p-lg-10">
+                            <div class="d-flex justify-content-between mb-6 ">
+                                <!-- heading -->
+                                <h2 class="mb-0">Address</h2>
+                                <!-- button -->
+                                <a href="{% url 'add_address' %}" class="btn btn-outline-primary">Add a new address </a>
+                            </div>
+                            <div class="row">
+                                <!-- col -->
+                                <% address.forEach(addr => { %>
+                                    <div class="col-lg-5 col-xxl-4 col-12 mb-4">
+                                        <!-- form -->
+                                        <div class="card">
+                                            <div class="card-body p-6">
+                                                <div class="mb-4 fs-5">
+                                                    <% if (addr.type == 1) { %>
+                                                        <i class="bi bi-house-fill"></i>
+                                                    <% } else if (addr.type == 2) { %>
+                                                        <i class="bi bi-building-fill"></i>
+                                                    <% } else { %>
+                                                        <i class="bi bi-geo-alt-fill"></i>
+                                                    <% } %>
+
+                                                    <span class="text-dark fw-semi-bold"> <%=addressType[addr.type]%> </span>
+                                                </div>
+                                                <!-- address -->
+                                                <p class="mb-6">
+                                                    <%=addr.name%><br>
+
+                                                    <%=addr.address_line1%>, <br>
+
+                                                    <% if (addr.address_line2){%> 
+                                                        <%=addr.address_line2%>,<br>
+                                                    <% } if (addr.landmark) {%> 
+                                                        <%=addr.landmark%>,<br> 
+                                                    <% } %>
+                                                    <%=addr.mobile_no%>
+                                                </p>
+                                                <!-- btn -->
+                                                <% if (addr.is_default){%> 
+                                                    <a href="#" class="btn btn-info btn-sm">Default address</a>
+                                                <% } else { %>
+                                                    <a href="/account/mark-default-address/<%=addr.id%>" class="link-primary">Set as Default</a>
+                                                <% } %>
+                                                <div class="mt-4">
+                                                    <a href="{% url 'edit_address' addr.id %}" class="text-inherit">Edit </a>
+                                                    <a href="{% url 'delete_address' addr.id %}" class="text-danger ms-3">Delete </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% }) %>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <%- include('./partials/footer') %>

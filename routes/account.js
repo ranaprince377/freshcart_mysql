@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const{ User } = require('./../models/user');
 const crypto = require('crypto');
+const { getUserAddress, setDefaultAddress } = require('../controllers/userController');
+const { addressType } = require('./../inc/eum');
 
 router.get('/profile', async (req, res) => {
     const userId = 15;
@@ -72,6 +74,25 @@ router.post('/changepassword', async (req, res) => {
     }
     
     res.redirect('/account/profile?' + param);
+});
+
+router.get('/orders', (req, res) => {
+    res.send('profile');
+});
+
+router.get('/address', (req, res) => {
+    getUserAddress(1).then((address) =>{
+        res.locals.title = 'Address';
+        res.render('address', {'address': address, 'addressType': addressType});
+    });
+    
+});
+
+router.get('/mark-default-address/:addressId', (req, res) => {
+    const addressId = req.params.addressId;
+    setDefaultAddress(1, addressId).then(() => {
+        res.redirect('/account/address');
+    });
 });
 
 router.get('/orders', (req, res) => {

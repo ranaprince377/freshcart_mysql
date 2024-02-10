@@ -1,4 +1,4 @@
-const { User } = require('./../models/user');
+const { User, Address } = require('./../models/user');
 const crypto = require('crypto');
 const fs = require('fs');
 
@@ -41,4 +41,31 @@ async function authUser(req, res){
     }
 }
 
-module.exports = { registerUser, authUser }
+async function getUserAddress(userId){
+    const address = await Address.findAll({
+        where: {
+            user: userId
+        }
+    });
+
+    return address;
+}
+
+async function setDefaultAddress(userId, addressId){
+    await Address.update({is_default: 0}, {
+        where: {
+            user: userId
+        }
+    });
+
+    await Address.update({is_default: 1}, {
+        where: {
+            user: userId,
+            id: addressId
+        }
+    });
+
+    return true;
+}
+
+module.exports = { registerUser, authUser, getUserAddress, setDefaultAddress }

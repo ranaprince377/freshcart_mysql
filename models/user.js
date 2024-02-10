@@ -36,6 +36,14 @@ const User = sequelize.define('user',
 // Address Model
 const Address = sequelize.define('address',
     {
+        user: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: User,
+                key: 'id'
+            }
+
+        },
         name: {
             type: DataTypes.STRING(50),
             allowNull: false,
@@ -219,6 +227,8 @@ const OrderItem = sequelize.define('order_item',
         timestamps: false
     }
 );
+
+User.hasMany(Address, { foreignKey: 'user' });
 
 // sequelize.sync({ alter: true });
 
