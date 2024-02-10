@@ -2,12 +2,14 @@ const express = require('express');
 const router = express.Router();
 const{ User } = require('./../models/user');
 const crypto = require('crypto');
-const { getUserAddress, setDefaultAddress } = require('../controllers/userController');
+const { getUserAddress, setDefaultAddress, addUserAddress, removeUserAddress } = require('../controllers/userController');
 const { addressType } = require('./../inc/eum');
 
 router.get('/profile', async (req, res) => {
     const userId = 15;
     res.locals.title = 'Profile';
+    res.locals.active_profile = 'active';
+
     const user = await User.findByPk(userId, { attributes: ['first_name', 'last_name', 'email'] });
 
     const status = req.query.s;
@@ -18,7 +20,6 @@ router.get('/profile', async (req, res) => {
         res.locals.message = message;
     }
     
-
     res.render('profile', { 'user': user });
 });
 
@@ -77,20 +78,69 @@ router.post('/changepassword', async (req, res) => {
 });
 
 router.get('/orders', (req, res) => {
+    res.locals.active_order = 'active';
     res.send('profile');
 });
 
 router.get('/address', (req, res) => {
-    getUserAddress(1).then((address) =>{
-        res.locals.title = 'Address';
+    res.locals.active_address = 'active';
+    res.locals.title = 'Address';
+    const status = req.query.s;
+    if(status && status != ''){
+        const message = req.query.m;
+
+        res.locals.status = status == 'e'? 'error': 'success';
+        res.locals.message = message;
+    }
+
+    getUserAddress(15).then((address) =>{
         res.render('address', {'address': address, 'addressType': addressType});
-    });
+    });  
+});
+
+router.get('/address/add', (req, res) => {
+    res.locals.active_address = 'active';
+    res.locals.title = 'Address';
+    res.render('add_edit_address', {address: 'address'});  
+});
+
+router.post('/address/add', (req, res) => {
+    addUserAddress(15, req.body).then((address) =>{
+        
+        param = '?s=s&m=New address added successfully.';
+        res.redirect('/account/address' + param);
+    });  
+});
+
+router.get('/address/edit/:address_id', (req, res) => {
+    const addressID = req.params.address_id;
+    res.locals.active_address = 'active';
+    res.locals.title = 'Address';
     
+    getUserAddress(15, addressID).then((address)=> {
+        res.render('add_edit_address', {address: address[0]});
+    }); 
+});
+
+router.post('/address/edit/:address_id', (req, res) => {
+    const addressID = req.params.address_id;
+    updateUserAddress(15, addressID).then((address) =>{
+        param = '?s=s&m=Address has been updated successfully.';
+        res.redirect('/account/address' + param);
+    });  
+});
+
+router.get('/address/delete/:address_id', (req, res) => {
+    const addressID = req.params.address_id;
+    removeUserAddress(15, addressID).then((address) =>{
+        param = '?s=s&m=Address has been removed.';
+        res.redirect('/account/address' + param);
+    }); 
 });
 
 router.get('/mark-default-address/:addressId', (req, res) => {
     const addressId = req.params.addressId;
-    setDefaultAddress(1, addressId).then(() => {
+    setDefaultAddress(15, addressId).then(() => {
         res.redirect('/account/address');
     });
 });

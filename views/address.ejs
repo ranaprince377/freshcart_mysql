@@ -15,9 +15,16 @@
                                 <!-- heading -->
                                 <h2 class="mb-0">Address</h2>
                                 <!-- button -->
-                                <a href="{% url 'add_address' %}" class="btn btn-outline-primary">Add a new address </a>
+                                <a href="/account/address/add" class="btn btn-outline-primary">Add a new address </a>
                             </div>
+                            <% if (locals.status) { %>
+                                <div class="alert alert-<%=locals.status%> alert-dismissible fade py-2 show" role="alert" style="width: fit-content;">
+                                    <strong><%=locals.status.charAt(0).toUpperCase() + locals.status.slice(1) %>!
+                                    </strong> <%=locals.message%>
+                                </div>
+                            <% } %>
                             <div class="row">
+                                
                                 <!-- col -->
                                 <% address.forEach(addr => { %>
                                     <div class="col-lg-5 col-xxl-4 col-12 mb-4">
@@ -55,8 +62,8 @@
                                                     <a href="/account/mark-default-address/<%=addr.id%>" class="link-primary">Set as Default</a>
                                                 <% } %>
                                                 <div class="mt-4">
-                                                    <a href="{% url 'edit_address' addr.id %}" class="text-inherit">Edit </a>
-                                                    <a href="{% url 'delete_address' addr.id %}" class="text-danger ms-3">Delete </a>
+                                                    <a href="/account/address/edit/<%=addr.id%>" class="text-inherit">Edit </a>
+                                                    <a href="/account/address/delete/<%=addr.id%>" class="text-danger ms-3">Delete </a>
                                                 </div>
                                             </div>
                                         </div>

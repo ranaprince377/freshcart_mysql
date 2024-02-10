@@ -41,11 +41,17 @@ async function authUser(req, res){
     }
 }
 
-async function getUserAddress(userId){
-    const address = await Address.findAll({
-        where: {
-            user: userId
+async function getUserAddress(userId, addressId = false){
+    var where = { user: userId }
+    
+    if(addressId !== false) {
+        where = {
+            user: userId,
+            id: addressId
         }
+    }
+    const address = await Address.findAll({
+        where: where
     });
 
     return address;
@@ -68,4 +74,36 @@ async function setDefaultAddress(userId, addressId){
     return true;
 }
 
-module.exports = { registerUser, authUser, getUserAddress, setDefaultAddress }
+async function addUserAddress(userId, formData){
+    
+    formData.is_default = formData.is_default == 'on'? 1: 0;
+    const newAddress = await Address.build({ 
+        user: userId,
+        name: formData.name,
+        mobile_no: formData.mobile_no,
+        address_line1: formData.address_line1,
+        address_line2: formData.address_line2,
+        landmark: formData.landmark,
+        city: formData.city,
+        pincode: formData.pincode,
+        type: formData.type,
+        is_default: formData.is_default 
+    });
+
+    newAddress.save();
+    if(formData.is_default == 1) await setDefaultAddress(userId, newAddress.id);
+    return true;
+}
+
+async function removeUserAddress(userId, addressId){
+    await Address.destroy({
+        where:{
+            id: addressId,
+            user: userId, 
+        } 
+    });
+
+    return true;
+}
+
+module.exports = { registerUser, authUser, getUserAddress, setDefaultAddress, addUserAddress, removeUserAddress }

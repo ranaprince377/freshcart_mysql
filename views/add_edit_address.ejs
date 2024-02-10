@@ -1,0 +1,90 @@
+<%- include('./partials/header') %>
+
+<!-- section -->
+<section>
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<!-- sidebar -->
+			<%- include('./partials/sidebar') %>
+
+			<div class="col-lg-9 col-md-8 col-12">
+				<div class="py-6 p-md-6 p-lg-10">
+					<div class="d-flex justify-content-between mb-6 ">
+						<!-- heading -->
+						<h2 class="mb-0">Address Form</h2>
+					</div>
+					<div class="container">
+						<form method="POST" action="">
+
+							<div class="row">
+
+								<% if (address && address.id) {%>
+									<input type="hidden" name="edit_address" value="<%=address.id%>">
+								<% } %>
+
+								<div class="col-6 mb-3">
+									<input type="text" name="name" class="form-control" placeholder="Name" maxlength="50" required="" id="id_name" value="<% if(address.name) { %> <%= address.name %> <% } %>">
+									<small class="text-danger"></small>
+								</div>
+
+								<div class="col-6 mb-3">
+									<input type="text" name="mobile_no" class="form-control" placeholder="Mobile Number" required="" id="id_mobile_no" spellcheck="false" data-ms-editor="true" value="<% if(address.mobile_no) { %> <%= address.mobile_no %> <% } %>"> 
+									<small class="text-danger"></small>
+								</div>
+
+								<div class="col-6 mb-3">
+									<input type="text" name="address_line1" class="form-control" placeholder="Address Line 1" maxlength="150" required="" id="id_address_line1" spellcheck="false" data-ms-editor="true" value="<% if(address.address_line1) { %> <%= address.address_line1 %> <% } %>">
+									<small class="text-danger"></small>
+								</div>
+
+								<div class="col-6 mb-3">
+									<input type="text" name="address_line2" class="form-control" placeholder="Address Line 2" maxlength="150" id="id_address_line2" spellcheck="false" data-ms-editor="true" value="<% if(address.address_line2) { %> <%= address.address_line2 %> <% } %>">
+									<small class="text-danger"></small>
+								</div>
+
+								<div class="col-6 mb-3">
+									<input type="text" name="landmark" class="form-control" placeholder="Landmark" maxlength="150" id="id_landmark" spellcheck="false" data-ms-editor="true" value="<% if(address.landmark) { %> <%= address.landmark %> <% } %>"> 
+									<small class="text-danger"></small>
+								</div>
+
+								<div class="col-6 mb-3">
+									<input type="text" name="city" class="form-control" placeholder="City" maxlength="100" required="" id="id_city" spellcheck="false" data-ms-editor="true" value="<% if(address.city) { %> <%= address.city %> <% } %>"> 
+									<small class="text-danger"></small>
+								</div>
+
+								<div class="col-6 mb-3">
+									<input type="text" name="pincode" class="form-control" placeholder="Pincode" maxlength="50" required="" id="id_pincode" spellcheck="false" data-ms-editor="true" value="<% if(address.pincode) { %> <%= address.pincode %> <% } %>"> 
+									<small class="text-danger"></small>
+								</div>
+
+								<div class="col-6 mb-3">
+									<select name="type" class="form-control" placeholder="Address Type"
+										id="id_type">
+										<option value="1" <% if(address.type == 1) { %> selected <% } %>>Home</option>
+
+										<option value="2" <% if(address.type == 2) { %> selected <% } %>>Office</option>
+
+										<option value="3" <% if(address.type == 3) { %> selected <% } %> selected="">Others</option>
+
+									</select>
+									<small class="text-danger"></small>
+								</div>
+
+								<div class="col-6 mb-3">
+									<input type="checkbox" name="is_default" id="id_is_default" <% if(address.is_default) { %> checked <% } %>> Set as default 
+									<small class="text-danger"></small>
+								</div>
+
+								<div class="col-12 d-grid">
+									<button type="submit" class="btn btn-primary">Save</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
